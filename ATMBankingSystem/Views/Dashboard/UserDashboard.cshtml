@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "User Dashboard";
+    var accounts = ViewBag.Accounts as List<Account>;
+    var transactions = ViewBag.Transactions as List<Transaction>;
+
+}
+
+<h2>User Dashboard</h2>
+
+@if (accounts != null && accounts.Any())
+{
+    <div class="card mb-3">
+        <h4>Your Accounts</h4>
+
+        @foreach (var acc in accounts)
+        {
+            <div class="card mb-2">
+                <div class="card-body">
+                    <strong>Account:</strong> @acc.AccountNumber<br />
+                    <strong>Balance:</strong> $@acc.Balance
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <h4>Recent Transactions</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in transactions)
+            {
+                <tr>
+                    <td>@t.AccountId</td>
+                    <td>@t.Type</td>
+                    <td>$@t.Amount</td>
+                    <td>@t.Date.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+      
+
+        <div class="form-group">
+        <label>Transactions list</label>
+            <select name="AccountId" class="form-control">
+                @foreach (var acc in accounts)
+                {
+                    <option value="@acc.Id">@acc.AccountNumber - Balance: $@acc.Balance</option>
+                }
+            </select>
+        </div>
+
+
+    @if (TempData["TransactionMessage"] != null)
+    {
+        <div class="alert alert-info mt-3">
+            @TempData["TransactionMessage"]
+        </div>
+    }
+
+}
+else
+{
+    <div class="alert alert-warning">
+        No account found for your email.
+    </div>
+}
