@@ -2,6 +2,8 @@
 
 public interface ITransactionService
 {
+    Task<List<Transaction>> GetTransactionsForUserAsync(string userEmail);
+
     Task<List<Account>> GetAllAccountsAsync();
     Task<List<Transaction>> GetAllAsync();
     Task<Transaction> GetByIdAsync(int id);

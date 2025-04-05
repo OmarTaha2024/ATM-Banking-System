@@ -57,4 +57,23 @@ public class TransactionService : ITransactionService
     {
         return await _context.Accounts.ToListAsync();
     }
+
+    public async Task<List<Transaction>> GetTransactionsForUserAsync(string userEmail)
+    {
+        var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == userEmail);
+        if (customer == null) return new List<Transaction>();
+
+        var userAccountIds = await _context.Accounts
+            .Where(a => a.CustomerId == customer.Id)
+            .Select(a => a.Id)
+            .ToListAsync();
+
+        return await _context.Transactions
+            .Include(t => t.Account)
+            .ThenInclude(a => a.Customer)
+            .Where(t => userAccountIds.Contains(t.AccountId))
+            .OrderByDescending(t => t.Date)
+            .ToListAsync();
+    }
+
 }

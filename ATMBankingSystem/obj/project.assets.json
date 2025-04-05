@@ -9024,11 +9024,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ATMBankingSystem\\ATMBankingSystem.csproj",
+      "projectUniqueName": "D:\\ATM-Banking-System\\ATMBankingSystem\\ATMBankingSystem.csproj",
       "projectName": "ATMBankingSystem",
-      "projectPath": "D:\\ATMBankingSystem\\ATMBankingSystem.csproj",
+      "projectPath": "D:\\ATM-Banking-System\\ATMBankingSystem\\ATMBankingSystem.csproj",
       "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "D:\\ATMBankingSystem\\obj\\",
+      "outputPath": "D:\\ATM-Banking-System\\ATMBankingSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",

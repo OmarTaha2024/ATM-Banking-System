@@ -20,9 +20,21 @@ public class TransactionsController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var transactions = await _transactionService.GetAllAsync();
+        List<Transaction> transactions;
+
+        if (User.IsInRole("Admin"))
+        {
+            transactions = await _transactionService.GetAllAsync();
+        }
+        else
+        {
+            var userEmail = User.Identity.Name;
+            transactions = await _transactionService.GetTransactionsForUserAsync(userEmail);
+        }
+
         return View(transactions);
     }
+
 
     public async Task<IActionResult> Details(int? id)
     {
