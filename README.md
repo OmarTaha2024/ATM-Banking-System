@@ -5,7 +5,8 @@
 An advanced banking web application that simulates the core features of an ATM system. Built using **ASP.NET Core 8.0**, **Entity Framework Core (Code-First)**, and **SQL Server**, the system implements solid architectural principles and real-world functionality.
 
 ---
-
+## Demo
+https://github.com/OmarTaha2024/ATM-Banking-System/tree/main/DemoforApp
 ## 🧠 Key Features
 
 - 🧾 **Customer Management** (Add, edit, delete, search)
