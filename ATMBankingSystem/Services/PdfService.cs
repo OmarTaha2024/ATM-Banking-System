@@ -1,8 +1,7 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using ATMBankingSystem.Models;
-using System.IO;
+using QuestPDF.Drawing;
 
 public static class PdfService
 {
@@ -12,39 +11,34 @@ public static class PdfService
         {
             container.Page(page =>
             {
-                page.Margin(50);
-                page.Footer().AlignCenter().Text("Thank you for using our ATM service.");
+                page.Size(PageSizes.A6);
+                page.Margin(30);
+                page.PageColor(Colors.White);
+                page.DefaultTextStyle(x => x.FontSize(12));
 
-                page.Content().Column(col =>
-                {
-                    col.Item().Text($"Date: {transaction.Date}").FontSize(12);
-                    col.Item().Text($"Account Number: {account.AccountNumber}");
-                    col.Item().Text($"Transaction Type: {transaction.Type}");
-                    col.Item().Text($"Amount: ${transaction.Amount}");
-                    col.Item().Text($"Remaining Balance: ${account.Balance}");
-                    col.Item().Text($"Transaction ID: {transaction.Id}");
-                });
+                page.Content()
+                    .Column(col =>
+                    {
+                        col.Spacing(10);
 
-                page.Footer().AlignCenter().Text("Thank you for using our ATM service.");
+                        col.Item().AlignCenter().Text("ATM BANK SYSTEM").Bold().FontSize(16);
+                        col.Item().AlignCenter().Text("Transaction Receipt").Italic();
+
+                        col.Item().LineHorizontal(1);
+
+                        col.Item().Text($"Date:         {transaction.Date:G}");
+                        col.Item().Text($"Account No.:  {account.AccountNumber}");
+                        col.Item().Text($"Customer:     {account.Customer?.Name}");
+                        col.Item().Text($"Transaction:  {transaction.Type}");
+                        col.Item().Text($"Amount:       ${transaction.Amount:F2}");
+                        col.Item().Text($"Balance:      ${account.Balance:F2}");
+
+                        col.Item().LineHorizontal(1);
+                        col.Item().AlignCenter().Text("Thank you for banking with us!");
+                    });
             });
         });
 
         return document.GeneratePdf();
     }
-    public static string SaveTransactionReceiptToServer(Transaction transaction, Account account, string wwwRootPath)
-    {
-        var pdfBytes = GenerateTransactionReceipt(transaction, account);
-
-        string folderPath = Path.Combine(wwwRootPath, "receipts");
-        if (!Directory.Exists(folderPath))
-            Directory.CreateDirectory(folderPath);
-
-        string fileName = $"Receipt_{transaction.Id}.pdf";
-        string filePath = Path.Combine(folderPath, fileName);
-
-        File.WriteAllBytes(filePath, pdfBytes);
-
-        return filePath; // ترجع المسار الكامل للملف
-    }
-
 }

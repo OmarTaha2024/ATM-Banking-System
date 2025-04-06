@@ -27,6 +27,7 @@ namespace ATMBankingSystem
                 options.LogoutPath = "/Account/Logout";
             });
 
+            QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
             var app = builder.Build();
 

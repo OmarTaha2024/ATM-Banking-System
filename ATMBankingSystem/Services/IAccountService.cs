@@ -1,5 +1,6 @@
 ﻿public interface IAccountService
 {
+   Task<List<Account>> GetAccountsByUserEmailAsync(string email);
     Task<List<Customer>> GetAllCustomersAsync();
     Task<List<Account>> GetAllAsync();
     Task<Account> GetByIdAsync(int id);

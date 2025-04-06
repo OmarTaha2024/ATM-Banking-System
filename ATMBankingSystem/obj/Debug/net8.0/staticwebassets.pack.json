@@ -301,6 +301,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "D:\\ATM-Banking-System\\ATMBankingSystem\\wwwroot\\receipts\\Receipt_5.pdf",
+      "PackagePath": "staticwebassets\\receipts\\Receipt_5.pdf"
+    },
+    {
       "Id": "D:\\ATM-Banking-System\\ATMBankingSystem\\wwwroot\\vendor\\bootstrap\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\vendor\\bootstrap\\js\\bootstrap.bundle.js"
     },

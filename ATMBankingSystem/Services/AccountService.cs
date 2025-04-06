@@ -44,5 +44,17 @@ public class AccountService : IAccountService
     {
         return await _context.Customers.ToListAsync();
     }
+    public async Task<List<Account>> GetAccountsByUserEmailAsync(string email)
+    {
+        var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == email);
+
+        if (customer == null)
+            return new List<Account>();
+
+        return await _context.Accounts
+            .Where(a => a.CustomerId == customer.Id)
+            .Include(a => a.Customer)
+            .ToListAsync();
+    }
 
 }

@@ -103,15 +103,6 @@ public class DashboardController : Controller
         _context.Transactions.Add(transaction);
         await _context.SaveChangesAsync();
 
-        var wwwRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-        var receiptPath = PdfService.SaveTransactionReceiptToServer(transaction, account, wwwRoot);
-        await EmailService.SendTransactionEmailAsync(
-    toEmail: User.Identity.Name,
-    subject: "Your ATM Transaction Receipt",
-    body: $"Attached is your receipt for the recent {Type} of ${Amount}.",
-    attachmentPath: receiptPath
-);
-
         TempData["TransactionMessage"] = $"Transaction successful: {Type} ${Amount}";
 
         return RedirectToAction("DownloadReceipt", new { transactionId = transaction.Id });

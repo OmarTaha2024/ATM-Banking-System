@@ -7,15 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 public class TransactionsController : Controller
 {
     private readonly ITransactionService _transactionService;
+    private readonly IAccountService _accountService;
+
     public enum TransactionType
     {
         Deposit,
         Withdraw
     }
 
-    public TransactionsController(ITransactionService transactionService)
+    public TransactionsController(ITransactionService transactionService,IAccountService accountService)
     {
         _transactionService = transactionService;
+         _accountService = accountService;
     }
 
     public async Task<IActionResult> Index()
@@ -46,15 +49,27 @@ public class TransactionsController : Controller
         return View(transaction);
     }
 
+    [Authorize]
     public async Task<IActionResult> Create()
     {
-        var accounts = await _transactionService.GetAllAccountsAsync(); 
-        ViewData["AccountId"] = new SelectList(accounts, "Id", "AccountNumber");
+        List<Account> accounts;
 
-        ViewData["Type"] = new SelectList(Enum.GetValues(typeof(TransactionType)).Cast<TransactionType>());
+        if (User.IsInRole("Admin"))
+        {
+            accounts = await _accountService.GetAllAsync(); 
+        }
+        else
+        {
+            var userEmail = User.Identity.Name;
+            accounts = await _accountService.GetAccountsByUserEmailAsync(userEmail);
+        }
+
+        ViewData["AccountId"] = new SelectList(accounts, "Id", "DisplayText");
+        ViewData["Type"] = new SelectList(Enum.GetValues(typeof(TransactionType)));
 
         return View();
     }
+
 
 
     [HttpPost]

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rd/mhL9ujzWL+NACmXRchqE1s5D5NqSGvtpNXyJQEoM=",
+  "Hash": "MyJm25PsQTQKcWSymDwUFHPgdCkikEWpUqswj3Rxw74=",
   "Source": "ATMBankingSystem",
   "BasePath": "_content/ATMBankingSystem",
   "Mode": "Default",
@@ -2637,6 +2637,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\ATM-Banking-System\\ATMBankingSystem\\wwwroot\\receipts\\Receipt_5.pdf",
+      "SourceId": "ATMBankingSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ATM-Banking-System\\ATMBankingSystem\\wwwroot\\",
+      "BasePath": "_content/ATMBankingSystem",
+      "RelativePath": "receipts/Receipt_5.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\receipts\\Receipt_5.pdf"
     },
     {
       "Identity": "D:\\ATM-Banking-System\\ATMBankingSystem\\wwwroot\\vendor\\bootstrap\\js\\bootstrap.bundle.js",
