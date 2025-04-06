@@ -2,8 +2,9 @@
 
 using Microsoft.AspNetCore.Mvc;
 using ATMBankingSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
-
+[Authorize(Roles = "Admin")]
 public class CustomersController : Controller
 {
     private readonly ICustomerService _customerService;
